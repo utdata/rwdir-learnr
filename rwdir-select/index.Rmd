@@ -1,0 +1,94 @@
+---
+title: "Select"
+tutorial:
+  id: "rwdir-learnr/select"
+  version: .9
+output:
+  learnr::tutorial:
+    progressive: true
+    theme: lumen
+    highlight: espresso
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This is a work in progress. The goal is to write an example **learnr** lesson for Reporting with Data in R. This is just a draft concept.
+
+
+## Learn the Force: Select
+
+Explain concepts using Star Wars data.
+
+The [select]() function lets you pick columns.
+
+### Select columns
+
+You want to:
+
+- select specific columns in your data
+- drop specific columns in your data
+
+## Use the Force: Select
+
+First, look at the columns available
+
+```{r select-intro, exercise = T}
+starwars %>% glimpse()
+```
+
+### Select specific columns
+
+Use [select]() when you want to select specific columns from your data.
+
+```{r select-select, exercise = T}
+starwars %>% 
+  select(name, sex, homeworld)
+```
+
+
+In this case you specify exactly the columns of data that you need. In this case we want:
+
+
+### Drop a specific column
+
+```{r select-drop, exercise = T}
+starwars %>% 
+  select(-c(films, vehicles, starships))
+```
+
+
+
+## Scoobydoo
+
+- Data from [TidyTuesday, 2021-07-13,  Scooby-doo](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-13/readme.md)
+- About [Scooby-doo Complete](https://www.kaggle.com/williamschooleman/scoobydoo-complete)
+
+```{r import-scoobydoo, message=FALSE, warning=FALSE, include=FALSE}
+# scoobydoo <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-13/scoobydoo.csv')
+# scoobydoo %>% write_csv("data/scoobydoo.csv")
+
+scoobydoo <- read_csv("data/scoobydoo.csv")
+scoobydoo %>% glimpse()
+```
+
+## Crime stats
+
+- [Crime Reports About the data](https://data.austintexas.gov/Public-Safety/Crime-Reports/fdj4-gpfu)
+- Export is export of 2021 data only (downloaded 1/2/2022)
+
+```{r import-crime, include=FALSE}
+crime <- read_csv("data/atx-crime-2021.csv") %>% janitor::clean_names()
+crime %>% glimpse()
+```
+
+
+
+
+
+

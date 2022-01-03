@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(tidyverse)
+```
+
+## Pumpkins
+
+- Data from [TidyTuesday, 2021-10-19, Pumpkins](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-10-19/readme.md)
+- About [Big Pumpkins](http://www.bigpumpkins.com/ViewArticle.asp?id=132)
+
+Something is weird with this data. It won't write/read properly.
+
+```{r}
+pumpkins <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-19/pumpkins.csv')
+pumpkins %>% write_rds("data/pumpkins.rds")
+
+pumpkins %>% glimpse()
+
+# pumpkins %>% read_rds("data/pumpkins.rds")
+# pumpkins %>% glimpse()
+```
