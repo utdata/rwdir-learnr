@@ -1,0 +1,100 @@
+---
+title: "J327D Do Now: Tidyverse"
+output: 
+  learnr::tutorial:
+    progressive: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(gradethis)
+
+starwars <- starwars
+```
+
+In this exercise, you'll be practicing the `tidyverse` skills that you learn this week! To practice, we'll be using a dataset called `starwars`, which can be loaded in with the `tidyverse` package.
+
+## 1:Previewing our data
+
+First, let's learn about the `starwars` dataset. What function would you use to *glimpse* at the data?
+
+```{r glimpseexercise, exercise = TRUE}
+
+```
+
+```{r glimpseexercise-solution, exercise.reveal_solution = FALSE, include=FALSE}
+glimpse(starwars)
+```
+
+<div id="glimpseexercise-hint">
+**Hint:** Check out the `glimpse()` function, which we talk about in [Chapter 3](https://utdata.github.io/rwdir/counts-import.html#glimpse-the-data)
+</div>
+
+
+```{r quiz-glimpse, echo=FALSE, include=FALSE}
+quiz(
+  question("How many Star Wars characters are in the dataset",
+    answer("14"),
+    answer("87", correct = TRUE),
+    answer("41"),
+    answer("Unknown")
+  )
+)
+```
+
+## 2:Focusing on variables
+
+Let's say we want to *select* only on the following variables: `name`, `height`, `homeworld`, and `species`. How do we do that?
+
+```{r selectexercise, exercise = TRUE}
+
+```
+
+<div id="selectexercise-hint">
+**Hint:** I recommend checking out the `select()` function, which we talk about in [Chapter 3](https://utdata.github.io/rwdir/counts-import.html#selecting-columns)
+</div>
+
+```{r selectexercise-solution, exercise.reveal_solution = FALSE, include=FALSE}
+starwars %>%
+  select(
+    name,
+    height,
+    homeworld,
+    species
+  )
+```
+
+```{r arrangeexercise-setup, include=FALSE}
+starwars <- starwars %>%
+  select(
+    name,
+    height,
+    homeworld,
+    species
+  )
+```
+
+## 3:Arranging our Data
+
+Now that we have *glimpse*d our data and *select*ed our variables of interest, let's *arrange* them using by height. How do we do that?
+```{r arrangeexercise, exercise = TRUE}
+
+```
+
+```{r arrangeexercise-solution, exercise.reveal_solution = FALSE, include = FALSE}
+starwars %>%
+  arrange(-height)
+```
+
+```{r quiz-arrange, include = FALSE}
+quiz(
+  question("Who is the tallest character?",
+    answer("Yoda"),
+    answer("Darth Vader"),
+    answer("Chewbacca"),
+    answer("Yarael Poof", correct = TRUE)
+  )
+)
+```

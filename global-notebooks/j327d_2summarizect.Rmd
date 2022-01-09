@@ -1,0 +1,73 @@
+---
+title: "J327D Do Now: Summarizing by Count"
+output: 
+  learnr::tutorial:
+    progressive: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+#library(gradethis)
+
+starwars <- starwars
+```
+
+Hello again! In this exercise, you'll be practicing the `summarize()` and `group_by()` functions that you learned in Chapter 3 and 4 of [our textbook](https://utdata.github.io/rwdir/counts-import.html). Like our previous exercise, we'll be using the dataset `starwars` in the `tidyverse` packages.
+
+## Summarizing
+
+If you recall from our earlier exercise, `starwars` is a dataset with 87 Star Wars characters.
+
+```{r glimpse}
+glimpse(starwars)
+```
+
+What if we wanted to *group* the characters by `species` and count them? What two functions would we use?
+```{r gbsumexercise, exercise = TRUE}
+starwars
+```
+
+```{r gbsumexercise-solution, exercise.reveal_solution = FALSE}
+starwars %>%
+  group_by(species) %>%
+  summarize(count = n())
+```
+
+<div id="gbsumexercise-hint">
+**Hint:** Check out the `group_by()` and `summarize()` in [Chapter 4](https://utdata.github.io/rwdir/count-analysis.html#summarize)
+</div>
+
+## Arrange
+
+While the `group_by()` and `summarize()` functions are great for getting this information, the information is not ordered. What function would we use to **arrange** this data?
+
+As a tip, don't forget that we often want to sort the information by **desc**ending order, because journalists are typically interested in the *most* of something. 
+```{r arrangeexercise, exercise = TRUE}
+starwars %>%
+  group_by(species) %>%
+  summarize(count = n())
+```
+
+```{r arrangeexercise-solution, exercise.reveal_solution = FALSE, include = FALSE}
+starwars %>%
+  group_by(species) %>%
+  summarize(count = n()) %>%
+  arrange(count %>% desc())
+```
+
+<div id="arrangeexercise-hint">
+**Hint:** Check out `arrange` in [Chapter 4](https://utdata.github.io/rwdir/count-analysis.html#arrange-the-results)
+</div>
+
+```{r quiz-arrange, include = FALSE}
+quiz(
+  question("What species is the most common in Star Wars",
+    answer("Human", correct = TRUE),
+    answer("Droid"),
+    answer("Aleena"),
+    answer("Iktotchi")
+  )
+)
+```
