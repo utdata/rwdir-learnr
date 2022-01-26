@@ -1,39 +1,67 @@
 ---
-title: "J327D Do Now: Tidyverse"
+title: "J327D Quest: Tidyverse"
 output: 
   learnr::tutorial:
     progressive: true
 runtime: shiny_prerendered
 ---
 
+
 ```{r setup, include=FALSE}
 library(learnr)
-library(tidyverse)
+library(tidyverse) 
 library(gradethis)
 
 starwars <- starwars
+gradethis_setup()
+
+praise_list <- c("Great job you have done!", "Nice work. You have controlled your fear.", "Wow! The force is with you!", "Great job! Mind tricks don't work on you!")
+
+#random_sw_praise <- function(){sample(praise_list, 1)}
 ```
 
-In this exercise, you'll be practicing the `tidyverse` skills that you learn this week! To practice, we'll be using a dataset called `starwars`, which can be loaded in with the `tidyverse` package.
+## JediR Exercise 1
 
-## 1:Previewing our data
+Congratulations! You have recently been hired as a **data jedi** for the *Galactic News Hub*, the premiere news organization for the Star Wars Universe. Your first task: apply the `tidyverse` skills that you learned this week to a dataset of Star Wars characters.
 
-First, let's learn about the `starwars` dataset. What function would you use to *glimpse* at the data?
+### 1. Previewing our data
+
+For this exercise, we will using a dataset called `starwars`. This dataset comes with `tidyverse`, so if you have loaded `tidyverse` into your R environment using `library()`, the `starwars` dataset should be there! As you can see below, `starwars` contains some information about Star Wars characters, like their name and height.
+
+```{r starwarsintro, eval = FALSE}
+library(tidyverse)
+starwars 
+```
+
+First, let's learn about the `starwars` dataset. The first thing we'll want to know is how many characters are in the `starwars` dataset. What function would you use to *glimpse* the data to find that answer?
 
 ```{r glimpseexercise, exercise = TRUE}
 
-```
-
-```{r glimpseexercise-solution, exercise.reveal_solution = FALSE, include=FALSE}
-glimpse(starwars)
 ```
 
 <div id="glimpseexercise-hint">
 **Hint:** Check out the `glimpse()` function, which we talk about in [Chapter 3](https://utdata.github.io/rwdir/counts-import.html#glimpse-the-data)
 </div>
 
+```{r glimpseexercise-solution}
+glimpse(starwars)
+```
 
-```{r quiz-glimpse, echo=FALSE, include=FALSE}
+```{r glimpseexercise-check}
+grade_this({
+  if(identical(.result,.solution)){ 
+    pass(sample(praise_list, 1))
+  }
+  fail()
+})
+
+```
+
+(Once you have submitted your answer, you may need to click the "Run Code" button again to answer the next question.)
+
+Just as you submitted the answer, your humanoid robot editor (J-327) pops into your office and asks you how many people (characters) are in your dataset. What is your answer?
+
+```{r quiz-glimpse, echo = FALSE}
 quiz(
   question("How many Star Wars characters are in the dataset",
     answer("14"),
@@ -44,9 +72,9 @@ quiz(
 )
 ```
 
-## 2:Focusing on variables
+### 2. Focusing on variables {data-progressive=TRUE}
 
-Let's say we want to *select* only on the following variables: `name`, `height`, `homeworld`, and `species`. How do we do that?
+Now that we know how to *glimpse* into our dataset, let's wok on *select*ing specific variables of interest. Let's say your newspaper has asked you to write a story about height differences across different species. What function would you use to *select* only the following variables in `starwars`: `name`, `height`, `homeworld`, and `species`?
 
 ```{r selectexercise, exercise = TRUE}
 
@@ -56,7 +84,7 @@ Let's say we want to *select* only on the following variables: `name`, `height`,
 **Hint:** I recommend checking out the `select()` function, which we talk about in [Chapter 3](https://utdata.github.io/rwdir/counts-import.html#selecting-columns)
 </div>
 
-```{r selectexercise-solution, exercise.reveal_solution = FALSE, include=FALSE}
+```{r selectexercise-solution}
 starwars %>%
   select(
     name,
@@ -65,6 +93,17 @@ starwars %>%
     species
   )
 ```
+
+```{r selectexercise-check}
+grade_this({
+  if(identical(.result, .solution)){
+    pass(sample(praise_list, 1))
+  }
+  fail()
+})
+```
+
+### 3. Arranging our Data {data-progressive=TRUE}
 
 ```{r arrangeexercise-setup, include=FALSE}
 starwars <- starwars %>%
@@ -76,19 +115,33 @@ starwars <- starwars %>%
   )
 ```
 
-## 3:Arranging our Data
+Now that we have *glimpse*d our data and *select*ed our variables in the `starwars`, let's *arrange* them using by height. What function would we use to *arrange* our data so that the tallest person is listed at the top? (Hint: since `tidyverse` *arrange*s numbers from the smallest to the greatest number, you may need another function so the information is in *desc*ending order.)
 
-Now that we have *glimpse*d our data and *select*ed our variables of interest, let's *arrange* them using by height. How do we do that?
 ```{r arrangeexercise, exercise = TRUE}
 
 ```
 
-```{r arrangeexercise-solution, exercise.reveal_solution = FALSE, include = FALSE}
+<div id="selectexercise-hint">
+**Hint:** I recommend checking out the `arrange()` function, which we talk about in [Chapter 3](https://utdata.github.io/rwdir/counts-import.html#arrange-the-data)
+</div>
+
+```{r arrangeexercise-solution}
 starwars %>%
-  arrange(-height)
+  arrange(height %>% desc())
 ```
 
-```{r quiz-arrange, include = FALSE}
+```{r arrangeexercise-check}
+grade_this({
+  if(identical(.result, .solution)){
+    pass(sample(praise_list, 1))
+  }
+  fail()
+})
+```
+
+So many tall characters! If your humanoid robot editor (J-327) wanted you to write a story about the tallest character in the dataset, who would that be?
+
+```{r quiz-arrange, echo = FALSE}
 quiz(
   question("Who is the tallest character?",
     answer("Yoda"),
@@ -98,3 +151,5 @@ quiz(
   )
 )
 ```
+
+Great job! Please inform your instructor that you have completed this exercise. 

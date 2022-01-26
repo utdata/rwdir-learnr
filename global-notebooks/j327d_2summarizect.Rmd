@@ -1,22 +1,32 @@
 ---
-title: "J327D Do Now: Summarizing by Count"
+title: "J327D Quest: Sum by Count"
 output: 
   learnr::tutorial:
     progressive: true
 runtime: shiny_prerendered
 ---
 
+
 ```{r setup, include=FALSE}
 library(learnr)
 library(tidyverse)
-#library(gradethis)
+library(gradethis)
 
 starwars <- starwars
+gradethis_setup()
+
+praise_list <- c("Great job you have done!", "Nice work. You have controlled your fear.", "Wow! The force is with you!", "Great job! Mind tricks don't work on you!")
+
 ```
 
-Hello again! In this exercise, you'll be practicing the `summarize()` and `group_by()` functions that you learned in Chapter 3 and 4 of [our textbook](https://utdata.github.io/rwdir/counts-import.html). Like our previous exercise, we'll be using the dataset `starwars` in the `tidyverse` packages.
 
-## Summarizing
+## JediR Exercise 2
+
+As a **data jedi** of the *Galactic news Hub*, you have been assigned to help with a new story about the demographics of the Star Wars Universe. After pitching a few different topics, your editor (J-327) has green lighted a pitch about species variation. For this article, you have been asked to provide a summary statistic about which species is the most common in the Star Wars universe.
+
+For this task, you will **summarize** and **group** the characters by species. You will then **arrange** the data to identify the most common species of all the Star Wars characters. Thankfully, you learned how to do these things in Chapter 3 and 4 of [our textbook](https://utdata.github.io/rwdir/counts-import.html).
+
+### 1. Summarizing
 
 If you recall from our earlier exercise, `starwars` is a dataset with 87 Star Wars characters.
 
@@ -24,24 +34,40 @@ If you recall from our earlier exercise, `starwars` is a dataset with 87 Star Wa
 glimpse(starwars)
 ```
 
-What if we wanted to *group* the characters by `species` and count them? What two functions would we use?
+First, we'll need to *group* the characters and then *summarize* by counting the *n*umber of characters of each species. 
+
+How do we do that? What functions would we use?
 ```{r gbsumexercise, exercise = TRUE}
-starwars
+starwars %>%
+  
+  #we recommend naming the field "count"!
 ```
 
-```{r gbsumexercise-solution, exercise.reveal_solution = FALSE}
+```{r gbsumexercise-solution}
 starwars %>%
   group_by(species) %>%
   summarize(count = n())
+```
+
+```{r gbsumexercise-check}
+grade_this({
+  if(identical(.result,.solution)){ 
+    pass(sample(praise_list, 1))
+  }
+  fail()
+})
+
 ```
 
 <div id="gbsumexercise-hint">
 **Hint:** Check out the `group_by()` and `summarize()` in [Chapter 4](https://utdata.github.io/rwdir/count-analysis.html#summarize)
 </div>
 
-## Arrange
+### 2. Arrange
 
-While the `group_by()` and `summarize()` functions are great for getting this information, the information is not ordered. What function would we use to **arrange** this data?
+While the `group_by()` and `summarize()` functions are great for summarizing this information, a [young padawan](https://www.starwars.com/news/what-is-a-padawan) has pointed out that the information is not ordered. 
+
+🙄 Rolling your eyes, you tell them that we'd need to use another function in order to **arrange** this data. To illustrate your point, let's try to **arrange** this data in the section below.
 
 As a tip, don't forget that we often want to sort the information by **desc**ending order, because journalists are typically interested in the *most* of something. 
 ```{r arrangeexercise, exercise = TRUE}
@@ -50,20 +76,31 @@ starwars %>%
   summarize(count = n())
 ```
 
-```{r arrangeexercise-solution, exercise.reveal_solution = FALSE, include = FALSE}
+<div id="arrangeexercise-hint">
+**Hint:** Check out `arrange` in [Chapter 4](https://utdata.github.io/rwdir/count-analysis.html#arrange-the-results)
+</div>
+
+```{r arrangeexercise-solution}
 starwars %>%
   group_by(species) %>%
   summarize(count = n()) %>%
   arrange(count %>% desc())
 ```
 
-<div id="arrangeexercise-hint">
-**Hint:** Check out `arrange` in [Chapter 4](https://utdata.github.io/rwdir/count-analysis.html#arrange-the-results)
-</div>
+```{r arrangeexercise-check}
+grade_this({
+  if(identical(.result,.solution)){
+    pass(sample(praise_list, 1))
+  }
+  fail()
+})
+```
 
-```{r quiz-arrange, include = FALSE}
+Now that you've **grouped** the data, **summarized** the number of characters of each species, and **arranged** the data (in **desc**ending order), you can finally tell your editor that you've compiled this information!
+
+```{r quiz-arrange, echo = FALSE}
 quiz(
-  question("What species is the most common in Star Wars",
+  question("What species is the most common in Star Wars?",
     answer("Human", correct = TRUE),
     answer("Droid"),
     answer("Aleena"),

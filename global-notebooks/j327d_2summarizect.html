@@ -14,7 +14,7 @@
 <meta name="allow-skip" content="false" />
 <meta name="learnr-version-prerender" content="0.10.1.9018" />
 
-<title>J327D Do Now: Summarizing by Count</title>
+<title>J327D Quest: Sum by Count</title>
 
 <!-- header-includes START -->
 <!-- header-includes END -->
@@ -107,9 +107,12 @@ if (window.hljs) {
 
 <div class="topics">
 
-<p>Hello again! In this exercise, you’ll be practicing the <code>summarize()</code> and <code>group_by()</code> functions that you learned in Chapter 3 and 4 of <a href="https://utdata.github.io/rwdir/counts-import.html">our textbook</a>. Like our previous exercise, we’ll be using the dataset <code>starwars</code> in the <code>tidyverse</code> packages.</p>
-<div id="section-summarizing" class="section level2">
-<h2>Summarizing</h2>
+<div id="section-jedir-exercise-2" class="section level2">
+<h2>JediR Exercise 2</h2>
+<p>As a <strong>data jedi</strong> of the <em>Galactic news Hub</em>, you have been assigned to help with a new story about the demographics of the Star Wars Universe. After pitching a few different topics, your editor (J-327) has green lighted a pitch about species variation. For this article, you have been asked to provide a summary statistic about which species is the most common in the Star Wars universe.</p>
+<p>For this task, you will <strong>summarize</strong> and <strong>group</strong> the characters by species. You will then <strong>arrange</strong> the data to identify the most common species of all the Star Wars characters. Thankfully, you learned how to do these things in Chapter 3 and 4 of <a href="https://utdata.github.io/rwdir/counts-import.html">our textbook</a>.</p>
+<div id="section-summarizing" class="section level3">
+<h3>1. Summarizing</h3>
 <p>If you recall from our earlier exercise, <code>starwars</code> is a dataset with 87 Star Wars characters.</p>
 <pre class="r"><code>glimpse(starwars)</code></pre>
 <pre><code>## Rows: 87
@@ -128,35 +131,64 @@ if (window.hljs) {
 ## $ films      &lt;list&gt; &lt;&quot;The Empire Strikes Back&quot;, &quot;Revenge of the Sith&quot;, &quot;Return~
 ## $ vehicles   &lt;list&gt; &lt;&quot;Snowspeeder&quot;, &quot;Imperial Speeder Bike&quot;&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, &quot;Imp~
 ## $ starships  &lt;list&gt; &lt;&quot;X-wing&quot;, &quot;Imperial shuttle&quot;&gt;, &lt;&gt;, &lt;&gt;, &quot;TIE Advanced x1&quot;,~</code></pre>
-What if we wanted to <em>group</em> the characters by <code>species</code> and count them? What two functions would we use?
+<p>First, we’ll need to <em>group</em> the characters and then <em>summarize</em> by counting the <em>n</em>umber of characters of each species.</p>
+How do we do that? What functions would we use?
 <div class="tutorial-exercise" data-label="gbsumexercise" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>starwars</code></pre>
-<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+<pre class="text"><code>starwars %&gt;%
+  
+  #we recommend naming the field &quot;count&quot;!</code></pre>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="gbsumexercise-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>starwars %&gt;%
+  group_by(species) %&gt;%
+  summarize(count = n())</code></pre>
 </div>
 <div id="section-gbsumexercise-hint">
 <p><strong>Hint:</strong> Check out the <code>group_by()</code> and <code>summarize()</code> in <a href="https://utdata.github.io/rwdir/count-analysis.html#summarize">Chapter 4</a></p>
 </div>
 </div>
-<div id="section-arrange" class="section level2">
-<h2>Arrange</h2>
-<p>While the <code>group_by()</code> and <code>summarize()</code> functions are great for getting this information, the information is not ordered. What function would we use to <strong>arrange</strong> this data?</p>
+<div id="section-arrange" class="section level3">
+<h3>2. Arrange</h3>
+<p>While the <code>group_by()</code> and <code>summarize()</code> functions are great for summarizing this information, a <a href="https://www.starwars.com/news/what-is-a-padawan">young padawan</a> has pointed out that the information is not ordered.</p>
+<p>🙄 Rolling your eyes, you tell them that we’d need to use another function in order to <strong>arrange</strong> this data. To illustrate your point, let’s try to <strong>arrange</strong> this data in the section below.</p>
 As a tip, don’t forget that we often want to sort the information by <strong>desc</strong>ending order, because journalists are typically interested in the <em>most</em> of something.
 <div class="tutorial-exercise" data-label="arrangeexercise" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>starwars %&gt;%
   group_by(species) %&gt;%
   summarize(count = n())</code></pre>
-<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
 <div id="section-arrangeexercise-hint">
 <p><strong>Hint:</strong> Check out <code>arrange</code> in <a href="https://utdata.github.io/rwdir/count-analysis.html#arrange-the-results">Chapter 4</a></p>
+</div>
+<div class="tutorial-exercise-support" data-label="arrangeexercise-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>starwars %&gt;%
+  group_by(species) %&gt;%
+  summarize(count = n()) %&gt;%
+  arrange(count %&gt;% desc())</code></pre>
+</div>
+<p>Now that you’ve <strong>grouped</strong> the data, <strong>summarized</strong> the number of characters of each species, and <strong>arranged</strong> the data (in <strong>desc</strong>ending order), you can finally tell your editor that you’ve compiled this information!</p>
+<p><div class="panel-heading tutorial-quiz-title"><span data-i18n="text.quiz">Quiz</span></div></p>
+<div class="panel panel-default">
+<div data-label="quiz-arrange-1" class="tutorial-question panel-body">
+<div id="quiz-arrange-1-answer_container" class="shiny-html-output"></div>
+<div id="quiz-arrange-1-message_container" class="shiny-html-output"></div>
+<div id="quiz-arrange-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
 </div>
 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
 library(tidyverse)
-#library(gradethis)
+library(gradethis)
 
 starwars <- starwars
+gradethis_setup()
+
+praise_list <- c("Great job you have done!", "Nice work. You have controlled your fear.", "Wow! The force is with you!", "Great job! Mind tricks don't work on you!")
+
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -186,14 +218,17 @@ output$`tutorial-exercise-gbsumexercise-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "#library(gradethis)", "", "starwars <- starwars"
-), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
-    chunks = list(list(label = "gbsumexercise", code = "starwars", 
+"library(tidyverse)", "library(gradethis)", "", "starwars <- starwars", 
+"gradethis_setup()", "", "praise_list <- c(\"Great job you have done!\", \"Nice work. You have controlled your fear.\", \"Wow! The force is with you!\", \"Great job! Mind tricks don't work on you!\")", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "gbsumexercise", code = "starwars %>%\n  \n  #we recommend naming the field \"count\"!", 
         opts = list(label = "\"gbsumexercise\"", exercise = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = NULL, solution = structure(c("starwars %>%", "  group_by(species) %>%", 
-    "  summarize(count = n())"), chunk_opts = list(label = "gbsumexercise-solution", 
-        exercise.reveal_solution = FALSE)), options = list(eval = FALSE, 
+    check = structure(c("grade_this({", "  if(identical(.result,.solution)){ ", 
+    "    pass(sample(praise_list, 1))", "  }", "  fail()", "})", 
+    ""), chunk_opts = list(label = "gbsumexercise-check")), solution = structure(c("starwars %>%", 
+    "  group_by(species) %>%", "  summarize(count = n())"), chunk_opts = list(
+        label = "gbsumexercise-solution")), options = list(eval = FALSE, 
         echo = TRUE, results = "markup", tidy = FALSE, tidy.opts = NULL, 
         collapse = FALSE, prompt = FALSE, comment = NA, highlight = FALSE, 
         size = "normalsize", background = "#F7F7F7", strip.white = TRUE, 
@@ -209,11 +244,12 @@ learnr:::store_exercise_cache(structure(list(global_setup = structure(c("library
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, label = "gbsumexercise", exercise = TRUE, 
-        code = "starwars", out.width.px = 624, out.height.px = 384, 
-        params.src = "gbsumexercise, exercise = TRUE", fig.num = 0, 
-        exercise.df_print = "paged", exercise.checker = "NULL"), 
-    engine = "r"), class = "tutorial_exercise"))
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ...) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
+        label = "gbsumexercise", exercise = TRUE, code = c("starwars %>%", 
+        "  ", "  #we recommend naming the field \"count\"!"), 
+        out.width.px = 624, out.height.px = 384, params.src = "gbsumexercise, exercise = TRUE", 
+        fig.num = 0, exercise.df_print = "paged"), engine = "r"), class = "tutorial_exercise"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -225,15 +261,17 @@ output$`tutorial-exercise-arrangeexercise-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "#library(gradethis)", "", "starwars <- starwars"
-), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+"library(tidyverse)", "library(gradethis)", "", "starwars <- starwars", 
+"gradethis_setup()", "", "praise_list <- c(\"Great job you have done!\", \"Nice work. You have controlled your fear.\", \"Wow! The force is with you!\", \"Great job! Mind tricks don't work on you!\")", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "arrangeexercise", code = "starwars %>%\n  group_by(species) %>%\n  summarize(count = n())", 
         opts = list(label = "\"arrangeexercise\"", exercise = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = NULL, solution = structure(c("starwars %>%", "  group_by(species) %>%", 
-    "  summarize(count = n()) %>%", "  arrange(count %>% desc())"
-    ), chunk_opts = list(label = "arrangeexercise-solution", 
-        exercise.reveal_solution = FALSE, include = FALSE)), 
+    check = structure(c("grade_this({", "  if(identical(.result,.solution)){", 
+    "    pass(sample(praise_list, 1))", "  }", "  fail()", "})"
+    ), chunk_opts = list(label = "arrangeexercise-check")), solution = structure(c("starwars %>%", 
+    "  group_by(species) %>%", "  summarize(count = n()) %>%", 
+    "  arrange(count %>% desc())"), chunk_opts = list(label = "arrangeexercise-solution")), 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
         comment = NA, highlight = FALSE, size = "normalsize", 
@@ -250,26 +288,27 @@ learnr:::store_exercise_cache(structure(list(global_setup = structure(c("library
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, label = "arrangeexercise", exercise = TRUE, 
-        code = c("starwars %>%", "  group_by(species) %>%", "  summarize(count = n())"
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ...) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
+        label = "arrangeexercise", exercise = TRUE, code = c("starwars %>%", 
+        "  group_by(species) %>%", "  summarize(count = n())"
         ), out.width.px = 624, out.height.px = 384, params.src = "arrangeexercise, exercise = TRUE", 
-        fig.num = 0, exercise.df_print = "paged", exercise.checker = "NULL"), 
-    engine = "r"), class = "tutorial_exercise"))
+        fig.num = 0, exercise.df_print = "paged"), engine = "r"), class = "tutorial_exercise"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz-arrange-1", 
-    question = structure("What species is the most common in Star Wars", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_4fc0ceb", 
+    question = structure("What species is the most common in Star Wars?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_c25bce4", 
         option = "Human", value = "Human", label = structure("Human", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_13b2389", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b742772", 
         option = "Droid", value = "Droid", label = structure("Droid", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1c41f0b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4105978", 
         option = "Aleena", value = "Aleena", label = structure("Aleena", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f37074f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3e4838b", 
         option = "Iktotchi", value = "Iktotchi", label = structure("Iktotchi", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -279,9 +318,9 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "quiz-arrange-1-answer", question = "quiz-arrange-1"), 
-    loading = structure("<strong>Loading:<\u002fstrong> \nWhat species is the most common in Star Wars\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    loading = structure("<strong>Loading:<\u002fstrong> \nWhat species is the most common in Star Wars?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 123231721.942616, options = list()), class = c("learnr_radio", 
+    seed = 453852737.288658, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  <!--html_preserve-->
@@ -291,9 +330,10 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cellranger","checkmate","cli","colorspace","compiler","crayon","curl","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","fastmap","forcats","fs","generics","ggplot2","glue","graphics","grDevices","grid","gtable","haven","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.4.1","4.1.2","0.7.10","0.3.1","1.1.0","2.0.0","3.1.0","2.0-2","4.1.2","1.4.2","4.3.2","4.1.2","1.1.2","2.1.1","0.6.29","1.0.7","0.3.2","0.14","0.5.0","1.1.0","0.5.1","1.5.2","0.1.1","3.3.5","1.6.0","4.1.2","4.1.2","4.1.2","0.3.0","2.4.3","1.1.1","0.5.2","1.5.4","1.6.4","1.4.2","0.1.4","1.7.2","1.37","1.3.0","0.10.1.9018","1.0.1","1.8.0","2.0.1","1.1","4.1.2","0.12","0.1.8","0.5.0","1.6.4","2.0.3","1.2.0.1","0.3.4","2.5.1","1.0.7","2.1.1","1.3.1","2.0.1","0.4.12","2.11","2.0.2","0.13","1.0.2","0.4.0","1.1.1","1.7.1","4.1.2","1.7.6","1.4.0","3.1.6","1.1.4","1.1.1","1.3.1","4.1.2","0.2.0","1.2.2","4.1.2","0.3.8","2.4.3","0.29","1.3.3","1.8-4","2.2.1"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cellranger","checkmate","cli","colorspace","compiler","crayon","curl","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","fastmap","forcats","fs","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","haven","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.4.1","4.1.2","0.7.11","0.3.1","1.1.0","2.0.0","3.1.0","2.0-2","4.1.2","1.4.2","4.3.2","4.1.2","1.1.2","2.1.1","0.6.29","1.0.7","0.3.2","0.14","0.5.0","1.1.0","0.5.1","1.5.2","0.1.1","3.3.5","1.6.0","0.2.4.9000","4.1.2","4.1.2","4.1.2","0.3.0","2.4.3","1.1.1","0.5.2","1.5.4","1.6.5","1.4.2","0.1.4","1.7.2","1.37","1.3.0","0.10.1.9018","1.0.1","1.8.0","2.0.1","1.1","4.1.2","0.12","0.1.8","0.5.0","1.6.4","2.0.3","1.2.0.1","0.3.4","2.5.1","1.0.7","2.1.1","1.3.1","2.0.1","0.4.12","2.11","2.0.2","0.13","1.0.2","0.4.0","1.1.1","1.7.1","4.1.2","1.7.6","1.4.0","3.1.6","1.1.4","1.1.1","1.3.1","4.1.2","0.2.0","1.2.2","4.1.2","0.3.8","2.4.3","0.29","1.3.3","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
+</div>
 </div>
 
 </div> <!-- topics -->
@@ -305,7 +345,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <!-- begin doc-metadata -->
 <div id="doc-metadata">
-<h2 class="title toc-ignore" style="display:none;">J327D Do Now: Summarizing by Count</h2>
+<h2 class="title toc-ignore" style="display:none;">J327D Quest: Sum by Count</h2>
 </div>
 <!-- end doc-metadata -->
 
