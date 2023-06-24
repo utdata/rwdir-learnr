@@ -1,5 +1,7 @@
 # Reporting with Data - LearnR Lessons
 
+> THIS PROJECT IS SUPERCEDED BY [JedR Academy](https://github.com/utdata/jedr-academy)
+
 A series of lessons to support Reporting with Data in R course.
 
 ## Goals
